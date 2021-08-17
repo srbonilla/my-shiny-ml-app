@@ -3,7 +3,7 @@ from sklearn.datasets import make_regression # Generate fetures, outputs, and tr
 from sklearn.ensemble import RandomForestRegressor
 from joblib import dump, load # to save and load model
 
-def generate_data(n=200, X_fn="X.npy", y_fn="y.npy", model_fn="model.joblib"):
+def generate_data(n=200, X_fn="data/X.npy", y_fn="data/y.npy", model_fn="data/model.joblib"):
   
   # generate dummy data
   X, y, coef = make_regression(n_samples = n, 

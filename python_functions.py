@@ -5,13 +5,13 @@ from sklearn.model_selection import train_test_split
 from joblib import dump, load # to save and load model
 
 # load training data
-def load_train_data(X_fn="X.npy", y_fn="y.npy"):
+def load_train_data(X_fn="data/X.npy", y_fn="data/y.npy"):
   X = np.load(X_fn)
   y = np.load(y_fn)
   return X.reshape(-1,), y
   
 # make prediction given a model
-def make_prediction(X, model_fn='model.joblib'):
+def make_prediction(X, model_fn='data/model.joblib'):
   
   # check for right dimensions
   assert X.ndim == 2 # matrix like
@@ -26,7 +26,7 @@ def make_prediction(X, model_fn='model.joblib'):
   return y_predict
   
 # generate prediciton curve
-def generate_prediction_curve(xmin=None, xmax=None, X_fn="X.npy", y_fn="y.npy"):
+def generate_prediction_curve(xmin=None, xmax=None, X_fn="data/X.npy", y_fn="data/y.npy"):
   # set default xmin or xmax
   if xmin is None:
     xmin = np.min(np.load(X_fn))
