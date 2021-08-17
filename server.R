@@ -24,7 +24,7 @@ shinyServer(function(input, output) {
   # Import python functions to R
   reticulate::source_python('python_functions.py')
   
-  # Generate a plot of the data CHANGE TO PLOTLY
+  # Generate a plot of the data
   
   output$plot <- renderPlotly({
     
@@ -61,6 +61,5 @@ shinyServer(function(input, output) {
     y = make_prediction(X)
     return(process_y_array(y))
   })
-  
   
 })
