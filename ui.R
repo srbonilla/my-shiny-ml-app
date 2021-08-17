@@ -1,11 +1,10 @@
 # Import R packages needed for the UI
 library(shiny)
-library(shinycssloaders)
-library(DT)
 library(plotly)
+library(shinythemes)
 
 # Begin UI for the R + reticulate example app
-ui <- fluidPage(
+ui <- fluidPage(theme=shinytheme("cosmo"),
   
   titlePanel('A simple ML app'),
   
@@ -33,7 +32,7 @@ ui <- fluidPage(
                            verbatimTextOutput('message'),
                            br()),
                   tabPanel('Extra info', 
-                           h3("Wow, you've gotten quite far. I like your curiosity."),
+                           h3("I didn't expect to see you here. I like your curiosity."),
                            hr()
                   )
       )

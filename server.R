@@ -1,6 +1,5 @@
 # Import R packages
 library(shiny)
-library(DT)
 library(plotly)
 
 # Define any Python packages needed for the app here:
