@@ -3,19 +3,18 @@ library(shiny)
 library(plotly)
 
 # Define any Python packages needed for the app here:
-PYTHON_DEPENDENCIES = c('pip', 'numpy', 'sklearn', 'joblib', 'matplotlib')
+#PYTHON_DEPENDENCIES = c('pip==19.0.3', 'numpy', 'sklearn', 'joblib', 'matplotlib')
+PYTHON_DEPENDENCIES = c('numpy', 'sklearn', 'joblib', 'matplotlib')
 
 # Begin app server
 shinyServer(function(input, output) {
   
   # App virtualenv setup
-  
   virtualenv_dir = Sys.getenv('VIRTUALENV_NAME')
   python_path = Sys.getenv('PYTHON_PATH')
   
   # Create virtual env and install dependencies
-  reticulate::virtualenv_create(envname = virtualenv_dir, python = python_path)
-  reticulate::virtualenv_install(virtualenv_dir, packages = PYTHON_DEPENDENCIES, ignore_installed=TRUE)
+  reticulate::virtualenv_create(envname = virtualenv_dir, python = python_path, pip_version = '19.0.3', packages = PYTHON_DEPENDENCIES)
   reticulate::use_virtualenv(virtualenv_dir, required = T)
   
   # App server logic 
@@ -44,9 +43,9 @@ shinyServer(function(input, output) {
     
     # Make plot
     plot_ly() %>%
-      add_trace(x=x_train, y=y_train, type="scatter", mode="markers", name="train data", opacity = 0.5) %>%
-      add_trace(x=x_curve, y=y_curve, mode="lines", name="model predictions") %>%
-      add_trace(x=x, y=y, type="scatter", mode="markers", name="input data",
+      add_trace(x=x_train, y=y_train, type="scatter", mode="markers", name="Training data", opacity = 0.5) %>%
+      add_trace(x=x_curve, y=y_curve, mode="lines", name="Model fitting") %>%
+      add_trace(x=x, y=y, type="scatter", mode="markers", name="Input data",
                 color = I('black'), marker = list(size = 12, symbol="x")) %>%
       layout(xaxis=list(title="x variable"), yaxis=list(title="y prediction"))
     
