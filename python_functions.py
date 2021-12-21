@@ -48,9 +48,21 @@ def generate_prediction_curve(xmin=None, xmax=None, X_fn="data/X.npy", y_fn="dat
 # process input from shiny app into input to model
 def process_x_string(x_string):
     
-  x_list = x_string.split(", ")
-  x_array = np.array(x_list, dtype='float')
-  return x_array.reshape(-1,1)
+    x_string = x_string.replace(" ", "") # remove whitespaces
+    x_list = x_string.split(",") # split by commas
+    
+    # keep only numerical values
+    new_x_list = []
+    for x in x_list:
+        try:
+            x = float(x)
+            new_x_list.append(x)
+        except ValueError:
+            None
+
+    # convert to array
+    x_array = np.array(new_x_list, dtype='float')
+    return x_array.reshape(-1,1)
   
 # process output from model to string
 def process_y_array(A1_y):
